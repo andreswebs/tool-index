@@ -1,0 +1,151 @@
+swagger: "2.0"
+
+info:
+  version: "0.0.1"
+  title: Tool Index
+  description: A repository to manage information about tools
+
+host: tools.inexistent.xyz
+
+basePath: /
+
+schemes:
+  - http
+  - https
+
+consumes:
+  - application/json
+
+produces:
+  - application/json
+
+paths:
+  /tools:
+    get:
+      operationId: getTools
+
+      description: Get a list of all tools, or a list of tools by a tag specified in the tag query parameter.
+
+      parameters:
+        - name: tag
+          in: query
+          required: false
+          type: string
+          description: Tag used to filter tools.
+
+      responses:
+        200:
+          description: Successful response.
+          schema:
+            $ref: "#/definitions/toolList"
+
+        500:
+          description: Server error.
+          schema:
+            $ref: "#/definitions/error"
+
+    post:
+      operationId: addTool
+
+      description: Add a new tool.
+
+      parameters:
+        - name: tool
+          in: body
+          required: true
+          description: The new tool data
+          schema:
+            $ref: "#/definitions/newTool"
+
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: "#/definitions/registeredTool"
+
+        400:
+          description: Bad request
+          schema:
+            $ref: "#/definitions/error"
+
+        500:
+          description: Server error
+          schema:
+            $ref: "#/definitions/error"
+
+  /tools/{id}:
+    delete:
+      operationId: removeTool
+
+      description: Remove a tool by id.
+
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          description: Tool ID
+
+      responses:
+        200:
+          description: Successful response
+          schema: {}
+
+        404:
+          description: Not found
+          schema:
+            $ref: "#/definitions/error"
+
+        500:
+          description: Server error
+          schema:
+            $ref: "#/definitions/error"
+
+definitions:
+  toolList:
+    properties:
+      tools:
+        type: array
+        description: A list of all tools
+        items:
+          type: object
+          properties:
+            allOf:
+              $ref: "#/definitions/registeredTool"
+
+  registeredTool:
+    properties:
+      id:
+        type: string
+        description: A unique ID for a tool
+      allOf:
+        $ref: "#/definitions/newTool"
+    required:
+      - id
+
+  newTool:
+    properties:
+      title:
+        type: string
+        description: Name of the tool
+      link:
+        type: string
+        description: A link to the tool\'s website or repository
+      description:
+        type: string
+        description: A brief description of the tool
+      tags:
+        type: array
+        description: A list of tag keywords that classify the tool
+        items:
+          type: string
+    required:
+      - title
+
+  error:
+    properties:
+      error:
+        type: string
+        description: A publishable error message for the client
+    required:
+      - error

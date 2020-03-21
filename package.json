@@ -1,0 +1,42 @@
+{
+  "name": "tool-index-api",
+  "author": {
+    "name": "Andre Silva",
+    "email": "adev@disroot.org"
+  },
+  "description": "Tool Index - An API for managing tool information",
+  "version": "0.0.1",
+  "main": "server.js",
+  "private": true,
+  "license": "Unlicense",
+  "scripts": {
+    "start": "node ./server.js",
+    "start:debug": "DEBUG=* node ./server.js",
+    "dev": "DEBUG=* npx nodemon ./server.js",
+    "test": "npx mocha --exit",
+    "dev:dckr": "docker-compose -f docker/docker-compose.development.yml up --build --abort-on-container-exit",
+    "test:dckr": "docker-compose -f ./docker/docker-compose.test.yml up --build --abort-on-container-exit",
+    "build:dckr": "docker-compose -f docker/docker-compose.production.yml build",
+    "clean:dckr": "docker ps -aqf status=exited | xargs docker rm && docker images -qf dangling=true | xargs docker rmi"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "debug": "~4.1.1",
+    "dotenv": "^8.2.0",
+    "express": "~4.17.1",
+    "helmet": "^3.21.3",
+    "http-errors": "~1.7.3",
+    "mongoose": "^5.9.5",
+    "mongoose-hidden": "^1.8.1",
+    "mongoose-unique-validator": "^2.0.3",
+    "morgan": "~1.10.0",
+    "xss-filters": "^1.2.7"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^7.1.1",
+    "nodemon": "^2.0.2"
+  }
+}

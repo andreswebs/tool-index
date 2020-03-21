@@ -1,0 +1,29 @@
+# Node
+node_modules
+
+# Docker
+docker
+Dockerfile
+docker-compose.*
+.dockerignore
+
+# Git
+.git
+.gitignore
+
+# env
+.env*
+
+# docs
+api-doc
+vuttr-api.yml
+
+# config and local db files
+db-data
+
+# Other
+editorconfig
+.ebextensions
+logging.conf
+*.log*
+*.md
