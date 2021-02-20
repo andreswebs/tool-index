@@ -16,7 +16,7 @@ docker-compose.*
 
 # docs
 api-doc
-vuttr-api.yml
+tool-index-api.yml
 
 # config and local db files
 db-data

@@ -20,7 +20,7 @@ services:
     networks:
       - tool-index-network
     volumes:
-      - ../:/home/node/tool-index
+      - ../:/app/tool-index
   mongo:
     container_name: mongo
     image: mongo

@@ -1,8 +1,6 @@
 FROM node:13-alpine AS base
 
-RUN apk add --no-cache tini
-
-RUN   mkdir /app && \
+RUN mkdir /app && \
   chown -R node:node /app
 
 WORKDIR /app
@@ -16,8 +14,9 @@ EXPOSE 3000
 # production stage
 FROM base AS production
 
-RUN yarn install --production --silent --non-interactive
+ENV NODE_ENV=production
 
-ENTRYPOINT [ "/sbin/tini", "--" ]
+RUN yarn install --production --silent --non-interactive && \
+  yarn cache clean
 
 CMD [ "node", "./server.js" ]
