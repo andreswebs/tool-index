@@ -20,23 +20,23 @@
     "clean:dckr": "docker ps -aqf status=exited | xargs docker rm && docker images -qf dangling=true | xargs docker rmi"
   },
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "debug": "~4.2.0",
-    "dotenv": "^8.2.0",
-    "express": "~4.17.1",
-    "helmet": "^4.1.1",
-    "http-errors": "~1.8.0",
-    "mongoose": "^5.10.6",
-    "mongoose-hidden": "^1.9.0",
-    "mongoose-unique-validator": "^2.0.3",
-    "morgan": "~1.10.0",
-    "xss-filters": "^1.2.7"
+    "body-parser": "1.19.0",
+    "cors": "2.8.5",
+    "debug": "4.2.0",
+    "dotenv": "8.2.0",
+    "express": "4.17.1",
+    "helmet": "4.5.0",
+    "http-errors": "1.8.0",
+    "mongoose": "5.12.5",
+    "mongoose-hidden": "1.9.1",
+    "mongoose-unique-validator": "2.0.3",
+    "morgan": "1.10.0",
+    "xss-filters": "1.2.7"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "chai-http": "^4.3.0",
-    "mocha": "^8.1.3",
-    "nodemon": "^2.0.4"
+    "chai": "4.3.4",
+    "chai-http": "4.3.0",
+    "mocha": "8.3.2",
+    "nodemon": "2.0.7"
   }
 }
