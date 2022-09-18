@@ -14,7 +14,7 @@ EXPOSE 3000
 # development stage
 FROM base AS development
 
-RUN yarn install --silent --non-interactive
+RUN npm install
 
 ENV DEBUG=*
 

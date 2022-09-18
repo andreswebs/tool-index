@@ -20,7 +20,7 @@ function random () {
   return Math.floor(Math.random() * 10000000);
 }
 
-describe('VUTTR API', function () {
+describe('API', function () {
 
   //disable timeout
   this.timeout(0);
@@ -28,7 +28,7 @@ describe('VUTTR API', function () {
   context('GET /tools', function () {
 
     it('should get all tools', function(done) {
-      
+
       chai.request(server)
         .get('/tools')
         .end((err, res) => {
@@ -51,7 +51,7 @@ describe('VUTTR API', function () {
           expect(res.body).to.be.an('array');
           done();
         });
-        
+
     });
 
   });
@@ -150,7 +150,7 @@ describe('VUTTR API', function () {
     });
 
     it('should respond with a 404 error when deleting an inexistent tool', function (done) {
-      
+
       const inexistentId = random();
 
       chai.request(server)

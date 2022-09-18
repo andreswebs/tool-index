@@ -2,14 +2,12 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const debug = require('debug')('database');
 
-async function connect () {
+async function connect() {
 
   // using options to fix deprecations:
   // https://mongoosejs.com/docs/deprecations.html
   const options = {
     useNewUrlParser: true,
-    useFindAndModify: false,
-    useCreateIndex: true
   };
 
   try {
@@ -25,13 +23,13 @@ async function connect () {
       debug('Connected');
       return connected;
     });
-    
-  
+
+
     db.connection.on(
-      'error', 
+      'error',
       console.error.bind(console, 'Database connection error:')
     );
-  
+
     return db;
   }
 
@@ -39,7 +37,7 @@ async function connect () {
     debug(error.toString());
     process.exit(1);
   }
-  
+
 
 }
 

@@ -16,7 +16,6 @@ FROM base AS production
 
 ENV NODE_ENV=production
 
-RUN yarn install --production --silent --non-interactive && \
-  yarn cache clean
+RUN npm install
 
 CMD [ "node", "./server.js" ]

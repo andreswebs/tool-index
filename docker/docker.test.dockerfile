@@ -14,6 +14,6 @@ EXPOSE 3000
 # test stage
 FROM base AS test
 
-RUN yarn install --silent --non-interactive
+RUN npm install
 
 CMD [ "npx", "mocha", "--exit" ]
