@@ -2,7 +2,7 @@
   "name": "tool-index-api",
   "author": {
     "name": "Andre Silva",
-    "email": "adev@disroot.org"
+    "email": "andreswebs@pm.me"
   },
   "description": "Tool Index - An API for managing tool information",
   "version": "0.0.1",
@@ -14,9 +14,9 @@
     "start:debug": "DEBUG=* node ./server.js",
     "dev": "DEBUG=* npx nodemon ./server.js",
     "test": "npx mocha --exit",
-    "dev:dckr": "docker-compose -f docker/docker-compose.development.yml up --build --abort-on-container-exit",
-    "test:dckr": "docker-compose -f ./docker/docker-compose.test.yml up --build --abort-on-container-exit",
-    "build:dckr": "docker-compose -f docker/docker-compose.production.yml build",
+    "dev:dckr": "docker compose -f docker/docker-compose.development.yml up --build --abort-on-container-exit",
+    "test:dckr": "docker compose -f ./docker/docker-compose.test.yml up --build --abort-on-container-exit",
+    "build:dckr": "docker compose -f docker/docker-compose.production.yml build",
     "clean:dckr": "docker ps -aqf status=exited | xargs docker rm && docker images -qf dangling=true | xargs docker rmi"
   },
   "dependencies": {
@@ -27,7 +27,7 @@
     "express": "4.18.1",
     "helmet": "6.0.0",
     "http-errors": "2.0.0",
-    "mongoose": "6.5.4",
+    "mongoose": "6.6.1",
     "mongoose-hidden": "1.9.1",
     "mongoose-unique-validator": "3.1.0",
     "morgan": "1.10.0",
@@ -37,6 +37,6 @@
     "chai": "4.3.6",
     "chai-http": "4.3.0",
     "mocha": "10.0.0",
-    "nodemon": "2.0.19"
+    "nodemon": "2.0.20"
   }
 }

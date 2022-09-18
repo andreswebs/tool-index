@@ -1,4 +1,4 @@
-version: "3.7"
+version: '3'
 
 services:
   tool-index:
@@ -30,7 +30,7 @@ services:
       - ../db-data:/data/db
     command: mongod --noauth
     ports:
-      - "27017:27017"
+      - 27017:27017
 
 networks:
   tool-index-network:
