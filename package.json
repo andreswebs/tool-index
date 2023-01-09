@@ -20,7 +20,7 @@
     "clean:dckr": "docker ps -aqf status=exited | xargs docker rm && docker images -qf dangling=true | xargs docker rmi"
   },
   "dependencies": {
-    "body-parser": "1.20.0",
+    "body-parser": "1.20.1",
     "cors": "2.8.5",
     "debug": "4.3.4",
     "dotenv": "16.0.2",
