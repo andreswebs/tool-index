@@ -24,7 +24,7 @@ Once you have access to a MongoDB database, save the database URI in a file
 named `.env` at the root of the project, following the example in the
 `.env.example` file.
 
-## Installing
+## Installing dependencies locally
 
 ```sh
 npm install
@@ -53,13 +53,3 @@ npm run test
 ## License
 
 This project is licensed under the [Unlicense](UNLICENSE.md).
-
-## References
-
-Praveen Durairaj,
-[An Exhaustive Guide to Writing Dockerfiles for Node.js Web Apps](https://blog.hasura.io/an-exhaustive-guide-to-writing-dockerfiles-for-node-js-web-apps-bbee6bd2f3c4/),
-07 February 2018
-
-Various Authors,
-[Docker and Node.js Best Practices](https://github.com/nodejs/docker-node/blob/master/docs/BestPractices.md),
-2018
