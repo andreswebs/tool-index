@@ -3,7 +3,8 @@
 This is an example CRUD API written in TypeScript on NodeJS. The API exposes
 endpoints for storing and retrieving information about tools.
 
-See the [API documentation](#) for a description of available endpoints.
+See the [API specification](tool-index-api.spec.yml) for a description of
+available endpoints.
 
 ## Prerequisites
 
@@ -47,7 +48,7 @@ npm run test
 
 ## Author
 
-**Andre Silva** [adev@disroot.org](mailto:adev@disroot.org)
+**Andre Silva** - [@andreswebs](https://github.com/andreswebs)
 
 ## License
 
