@@ -23,4 +23,5 @@ ENV NODE_ENV=production
 COPY --from=deps --chown=node:node /app/node_modules/ /home/node/app/node_modules/
 COPY --from=build --chown=node:node /app/dist/src/ /home/node/app/
 USER node
+EXPOSE 3000
 CMD ["node", "/home/node/app/server.js"]
