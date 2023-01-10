@@ -1,0 +1,36 @@
+---
+name: tool-index
+
+networks:
+  tool-index-net:
+    name: tool-index-net
+
+services:
+
+  api:
+    container_name: tool-index-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    init: true
+    restart: always
+    environment:
+      DB_HOST: mongodb://db:27017/tool-index
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    networks:
+      - tool-index-net
+
+  db:
+    container_name: tool-index-db
+    image: mongo:latest
+    init: true
+    restart: always
+    networks:
+      - tool-index-net
+    command: mongod --noauth
+    # ports:
+    #   - "27017:27017"
+

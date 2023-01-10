@@ -1,0 +1,144 @@
+---
+openapi: 3.0.3
+
+info:
+  title: Tool Index
+  description: A repository to manage information about tools
+  version: 0.0.1
+
+paths:
+  /tools:
+    get:
+      description: Get a list of all tools, or a list of tools by a tag specified
+        in the tag query parameter
+      operationId: getTools
+      parameters:
+      - name: tag
+        in: query
+        description: Tag used to filter tools
+        schema:
+          type: string
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/toolList'
+        500:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    post:
+      description: Add a new tool
+      operationId: addTool
+      requestBody:
+        description: The new tool data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/newTool'
+        required: true
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/registeredTool'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        500:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /tools/{id}:
+    delete:
+      description: Remove a tool by id
+      operationId: removeTool
+      parameters:
+      - name: id
+        in: path
+        description: Tool ID
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        404:
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        500:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+components:
+
+  schemas:
+    toolList:
+      type: object
+      properties:
+        tools:
+          type: array
+          description: A list of all tools
+          items:
+            type: object
+            properties:
+              allOf:
+                $ref: '#/components/schemas/registeredTool'
+    registeredTool:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: string
+          description: A unique ID for a tool
+        allOf:
+          $ref: '#/components/schemas/newTool'
+    newTool:
+      required:
+      - title
+      type: object
+      properties:
+        title:
+          type: string
+          description: Name of the tool
+        link:
+          type: string
+          description: A link to the tool\'s website or repository
+        description:
+          type: string
+          description: A brief description of the tool
+        tags:
+          type: array
+          description: A list of tag keywords that classify the tool
+          items:
+            type: string
+
+    error:
+      required:
+      - error
+      type: object
+      properties:
+        error:
+          type: string
+          description: A publishable error message for the client

@@ -1,0 +1,24 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var express_1 = __importDefault(require("express"));
+var helmet_1 = __importDefault(require("helmet"));
+var cors_1 = __importDefault(require("cors"));
+var body_parser_1 = __importDefault(require("body-parser"));
+var morgan_1 = __importDefault(require("morgan"));
+var not_found_1 = __importDefault(require("./middleware/not-found"));
+var error_handler_1 = __importDefault(require("./middleware/error-handler"));
+var tools_router_1 = __importDefault(require("./routes/tools.router"));
+var db_1 = __importDefault(require("./db"));
+var app = (0, express_1.default)();
+(0, db_1.default)();
+app.use((0, helmet_1.default)());
+app.use((0, cors_1.default)());
+app.use((0, morgan_1.default)('dev'));
+app.use(body_parser_1.default.json());
+app.use(tools_router_1.default);
+app.use(not_found_1.default);
+app.use(error_handler_1.default);
+exports.default = app;

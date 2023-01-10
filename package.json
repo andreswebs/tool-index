@@ -1,23 +1,22 @@
 {
   "name": "tool-index-api",
   "author": {
-    "name": "Andre Silva",
-    "email": "andreswebs@pm.me"
+    "name": "Andre Silva"
   },
   "description": "Tool Index - An API for managing tool information",
   "version": "0.0.1",
-  "main": "server.js",
   "private": true,
   "license": "Unlicense",
+  "main": "dist/src/server.js",
+  "files": [
+    "dist/src"
+  ],
   "scripts": {
-    "start": "node ./server.js",
-    "start:debug": "DEBUG=* node ./server.js",
-    "dev": "DEBUG=* npx nodemon ./server.js",
-    "test": "npx mocha --exit",
-    "dev:dckr": "docker compose -f docker/docker-compose.development.yml up --build --abort-on-container-exit",
-    "test:dckr": "docker compose -f ./docker/docker-compose.test.yml up --build --abort-on-container-exit",
-    "build:dckr": "docker compose -f docker/docker-compose.production.yml build",
-    "clean:dckr": "docker ps -aqf status=exited | xargs docker rm && docker images -qf dangling=true | xargs docker rmi"
+    "build": "npx rimraf ./dist && npx tsc",
+    "start": "npm run build &&  node ./dist/src/server.js",
+    "start:debug": "DEBUG=* ts-node ./src/server.ts",
+    "dev": "DEBUG=* npx nodemon ./src/server.ts",
+    "test": "npx ts-mocha test/**/*.spec.ts --exit"
   },
   "dependencies": {
     "body-parser": "1.20.1",
@@ -26,7 +25,6 @@
     "dotenv": "16.0.3",
     "express": "4.18.2",
     "helmet": "6.0.1",
-    "http-errors": "2.0.0",
     "mongoose": "6.8.3",
     "mongoose-hidden": "1.9.1",
     "mongoose-unique-validator": "3.1.0",
@@ -34,9 +32,29 @@
     "xss-filters": "1.2.7"
   },
   "devDependencies": {
+    "@types/body-parser": "^1.19.2",
+    "@types/chai": "^4.3.4",
+    "@types/cors": "^2.8.13",
+    "@types/debug": "^4.1.7",
+    "@types/express": "^4.17.15",
+    "@types/mocha": "^10.0.1",
+    "@types/mongoose-unique-validator": "^1.0.6",
+    "@types/morgan": "^1.9.4",
+    "@types/node": "^18.11.18",
+    "@types/xss-filters": "^0.0.27",
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "@typescript-eslint/parser": "^5.48.1",
     "chai": "4.3.7",
     "chai-http": "4.3.0",
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "mocha": "10.2.0",
-    "nodemon": "2.0.20"
+    "nodemon": "2.0.20",
+    "prettier": "^2.8.2",
+    "rimraf": "^3.0.2",
+    "ts-mocha": "^10.0.0",
+    "typescript": "^4.9.4"
   }
 }
