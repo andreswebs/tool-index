@@ -23,6 +23,13 @@ function errorHandler(
       : STATUS_CODES[err.status]
     : STATUS_CODES[500];
 
+  // OTel: sample all errors
+  /*
+  currentSpan.setAttributes({
+      'sampling.priority': 1,
+  });
+  */
+
   // error response
   return res.status(status).send({
     error: msg,

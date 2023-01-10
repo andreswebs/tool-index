@@ -13,8 +13,8 @@ class HTTPError extends Error {
     this.expose = opt?.expose || false;
     Error.captureStackTrace(this);
   }
-  status: number;
   cause: any;
+  status: number;
   expose: boolean;
 }
 
