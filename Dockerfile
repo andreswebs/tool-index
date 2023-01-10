@@ -17,11 +17,13 @@ RUN \
 
 # Release
 FROM node:18-bullseye-slim AS release
+ARG PORT=3000
+ENV PORT="${PORT}"
 WORKDIR /home/node/app
 RUN chown -R node:node /home/node/app
 ENV NODE_ENV=production
 COPY --from=deps --chown=node:node /app/node_modules/ /home/node/app/node_modules/
 COPY --from=build --chown=node:node /app/dist/src/ /home/node/app/
 USER node
-EXPOSE 3000
+EXPOSE ${PORT}
 CMD ["node", "/home/node/app/server.js"]
