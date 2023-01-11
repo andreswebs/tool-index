@@ -1,8 +1,8 @@
 import express from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
-import logger from 'morgan';
 
+import logger from './middleware/logger';
 import notFound from './middleware/not-found';
 import errorHandler from './middleware/error-handler';
 
@@ -14,17 +14,13 @@ const app = express();
 
 dbConnect();
 
+app.set('x-powered-by', false);
 app.use(helmet());
 app.use(cors());
-app.use(logger('dev'));
 app.use(express.json());
-
+app.use(logger);
 app.use(toolsRouter);
-
-// catch 404 and forward to error handler
 app.use(notFound);
-
-// error handler
 app.use(errorHandler);
 
 export default app;
