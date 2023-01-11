@@ -8,4 +8,11 @@ const signals = {
 
 const port = process.env.PORT || '3000';
 
-export { serviceName, port, signals };
+const otelEnabled: boolean = (() => {
+  if (String(process.env.APP_OTEL_ENABLED).toLowerCase() === 'false') {
+    return false;
+  }
+  return process.env.APP_OTEL_ENABLED ? true : false;
+})();
+
+export { serviceName, port, signals, otelEnabled };

@@ -1,4 +1,4 @@
-import { serviceName } from './constants';
+import { serviceName, otelEnabled } from './constants';
 
 import {
   diag,
@@ -69,7 +69,7 @@ function ignoreHealthCheck(
   );
 }
 
-diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.INFO);
+diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.ERROR);
 
 const tracerConfig: NodeTracerConfig = {
   resource: new Resource({
@@ -96,7 +96,9 @@ registerInstrumentations({
   ],
 });
 
-provider.register();
+if (otelEnabled) {
+  provider.register();
+}
 
 const tracer = trace.getTracer(serviceName);
 
