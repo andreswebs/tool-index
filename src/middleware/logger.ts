@@ -8,10 +8,12 @@ function logger(req: Request, res: Response, next: NextFunction) {
   res.on('finish', function onFinish() {
     const elapsed = process.hrtime(start);
     const elapsedms = elapsed[0] * 1e3 + elapsed[1] * 1e-6;
+    const size = res.getHeader('Content-Length');
+    const sizeSuffix = size ? ` - ${size} bytes` : '';
     console.log(
       `${req.method} ${req.originalUrl} ${res.statusCode} ${elapsedms.toFixed(
         3
-      )} ms - ${res.getHeader('Content-Length')} bytes`
+      )} ms${sizeSuffix}`
     );
   });
   next();

@@ -11,6 +11,7 @@ import {
 
 import {
   SimpleSpanProcessor,
+  // BatchSpanProcessor,
   AlwaysOnSampler,
   Sampler,
   SamplingDecision,
@@ -83,10 +84,12 @@ const provider = new NodeTracerProvider(tracerConfig);
 // const exporter = new ConsoleSpanExporter();
 
 const exporter = new OTLPTraceExporter({
-  url: process.env.OTEL_EXPORTER_OTLP_ENDPOINT
+  url: process.env.OTEL_EXPORTER_OTLP_ENDPOINT,
 });
 
-provider.addSpanProcessor(new SimpleSpanProcessor(exporter));
+const processor = new SimpleSpanProcessor(exporter);
+
+provider.addSpanProcessor(processor);
 
 registerInstrumentations({
   instrumentations: [
