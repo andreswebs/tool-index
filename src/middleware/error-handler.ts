@@ -15,7 +15,7 @@ function errorHandler(
   res: Response,
   _next: NextFunction // eslint-disable-line @typescript-eslint/no-unused-vars
 ) {
-  debug(err.toString());
+  debug(`${err.name}: ${err.message}`);
 
   const isHTTPError = err instanceof HTTPError;
 
