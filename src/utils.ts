@@ -1,5 +1,6 @@
 import { Server } from 'node:http';
 import { signals } from './constants';
+import { provider } from './tracer';
 import debugSetup from 'debug';
 
 const debug = debugSetup('server');
@@ -8,7 +9,8 @@ const debug = debugSetup('server');
  * Handle linux signals
  */
 function handleSignals(server: Server) {
-  const shutdown = (signal: string, value: number) => {
+  const shutdown = async (signal: string, value: number) => {
+    await provider.shutdown();
     server.close(() => {
       debug(`stopped by ${signal}`);
       process.exit(128 + value);
@@ -16,8 +18,8 @@ function handleSignals(server: Server) {
   };
 
   Object.keys(signals).forEach((signal) => {
-    process.on(signal, () => {
-      shutdown(signal, signals[signal]);
+    process.on(signal, async () => {
+      await shutdown(signal, signals[signal]);
     });
   });
 }

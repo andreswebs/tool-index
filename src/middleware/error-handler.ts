@@ -1,7 +1,7 @@
 import { STATUS_CODES } from 'node:http';
 import { Request, Response, NextFunction } from 'express';
 import { HTTPError } from '../errors';
-import { context, trace } from '@opentelemetry/api';
+import { context, trace, SpanStatusCode } from '@opentelemetry/api';
 import debugSetup from 'debug';
 
 const debug = debugSetup('errorHandler');
@@ -30,9 +30,14 @@ function errorHandler(
     // OTel: sample all errors
     const activeCtx = context.active();
     const currentSpan = trace.getSpan(activeCtx);
-    currentSpan.setAttributes({
+    if (currentSpan) {
+      currentSpan.setAttributes({
         'sampling.priority': 1,
-    });
+      });
+      currentSpan.recordException(err);
+      currentSpan.setStatus({ code: SpanStatusCode.ERROR });
+      currentSpan.end();
+    }
   } catch (e) {
     debug(`Error setting up OTel: ${e.message}`);
   }
