@@ -22,7 +22,11 @@ app.use(logger);
 app.use(toolsRouter);
 
 app.get('/health', (_req, res) => {
-  res.status(204).send();
+  res.status(200).json({ msg: 'healthy' });
+});
+
+app.get('/', (_req, res) => {
+  res.status(204).end();
 });
 
 app.use(notFound);
