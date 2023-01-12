@@ -2,8 +2,9 @@ import { Request, Response, NextFunction } from 'express';
 import { HTTPError } from '../errors';
 import Tool from '../models/tool';
 
-// controller methods will forward known errors to the error handler
-
+/**
+ * Get all tools, or filter by tag
+ */
 async function getTools(req: Request, res: Response, next: NextFunction) {
   const tag = req.query.tag;
 
@@ -23,6 +24,9 @@ async function getTools(req: Request, res: Response, next: NextFunction) {
   }
 }
 
+/**
+ * Create a new tool
+ */
 async function createTool(req: Request, res: Response, next: NextFunction) {
   const tool = new Tool(req.body);
 
@@ -45,6 +49,9 @@ async function createTool(req: Request, res: Response, next: NextFunction) {
   }
 }
 
+/**
+ * Delete a tool by id
+ */
 async function deleteTool(req: Request, res: Response, next: NextFunction) {
   const id = req.params.id;
 
