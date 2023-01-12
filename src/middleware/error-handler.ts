@@ -43,7 +43,7 @@ function errorHandler(
   }
 
   // error response
-  return res.status(status).send({
+  return res.status(status).json({
     error: msg,
   });
 }
