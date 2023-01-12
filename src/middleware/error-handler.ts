@@ -36,7 +36,6 @@ function errorHandler(
       });
       currentSpan.recordException(err);
       currentSpan.setStatus({ code: SpanStatusCode.ERROR });
-      currentSpan.end();
     }
   } catch (e) {
     debug(`Error setting up OTel: ${e.message}`);
