@@ -16,7 +16,7 @@ function logger(req: Request, res: Response, next: NextFunction) {
       )} ms${sizeSuffix}`
     );
   });
-  next();
+  return next();
 }
 
 export default logger;

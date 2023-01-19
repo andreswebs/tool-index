@@ -42,8 +42,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 var mongoose_1 = __importDefault(require("mongoose"));
-var debug_1 = __importDefault(require("debug"));
-var debug = (0, debug_1.default)('database');
 mongoose_1.default.set('strictQuery', false);
 function connect() {
     return __awaiter(this, void 0, void 0, function () {
@@ -56,7 +54,7 @@ function connect() {
                         throw new Error('missing environment variable: DB_HOST');
                     }
                     return [4, mongoose_1.default.connect(process.env.DB_HOST).then(function (connected) {
-                            debug('Connected');
+                            console.log('Connected');
                             return connected;
                         })];
                 case 1:
@@ -65,7 +63,7 @@ function connect() {
                     return [2, db];
                 case 2:
                     error_1 = _a.sent();
-                    debug(error_1.toString());
+                    console.error(error_1.toString());
                     process.exit(1);
                     return [3, 3];
                 case 3: return [2];

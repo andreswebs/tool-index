@@ -4,9 +4,6 @@ import http from 'http';
 import app from './app';
 import { handleSignals } from './utils';
 import { port } from './constants';
-import debugSetup from 'debug';
-
-const debug = debugSetup('server');
 
 function onError(error: any) {
   if (error.syscall !== 'listen') {
@@ -32,7 +29,7 @@ function onError(error: any) {
 function onListening() {
   const addr = server.address();
   const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
-  debug(`listening on ${bind}`);
+  console.log(`listening on ${bind}`);
 }
 
 /**

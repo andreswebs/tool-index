@@ -2,9 +2,6 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import mongoose from 'mongoose';
-import debugSetup from 'debug';
-
-const debug = debugSetup('database');
 
 mongoose.set('strictQuery', false);
 
@@ -15,7 +12,7 @@ async function connect() {
     }
 
     const db = await mongoose.connect(process.env.DB_HOST).then((connected) => {
-      debug('Connected');
+      console.log('Connected');
       return connected;
     });
 
@@ -26,7 +23,7 @@ async function connect() {
 
     return db;
   } catch (error) {
-    debug(error.toString());
+    console.error(error.toString());
     process.exit(1);
   }
 }
