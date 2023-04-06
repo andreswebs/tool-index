@@ -67,3 +67,6 @@ typings/
 .next
 
 dist/
+
+.DS_Store
+
