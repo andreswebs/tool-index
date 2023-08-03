@@ -1,5 +1,5 @@
 # Dependencies
-FROM node:18-bullseye-slim AS deps
+FROM node:20-bullseye-slim AS deps
 ARG PORT
 WORKDIR /app
 ENV NODE_ENV=production
@@ -7,7 +7,7 @@ COPY package*.json /app/
 RUN npm install --omit=dev
 
 # Build
-FROM node:18-bullseye-slim AS build
+FROM node:20-bullseye-slim AS build
 ARG PORT
 WORKDIR /app
 COPY package*.json tsconfig.json /app/
@@ -18,7 +18,7 @@ RUN \
     npm run build
 
 # Release
-FROM node:18-bullseye-slim AS release
+FROM node:20-bullseye-slim AS release
 ARG PORT=3000
 ENV PORT=${PORT}
 EXPOSE ${PORT}
